@@ -1,0 +1,147 @@
+<mvc:View
+	controllerName="nworders.NorthwindOrderBrowser.controller.Detail"
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.m.semantic">
+
+	<semantic:DetailPage
+		id="page"
+		navButtonPress="onNavBack"
+		showNavButton="{device>/system/phone}"
+		title="{i18n>detailTitle}"
+		busy="{detailView>/busy}"
+		busyIndicatorDelay="{detailView>/delay}">
+
+		<semantic:content>
+			<ObjectHeader
+				id="objectHeader"
+				title="{i18n>orderIDText}: {OrderID}">
+			</ObjectHeader>
+			
+		<VBox class="sapUiSmallMargin">
+			<!-- Order details -->
+			<f:SimpleForm id="SimpleFormOrderData"
+				editable="false"
+				layout="ResponsiveGridLayout"
+				title="{i18n>orderDataTitle}"
+				labelSpanXL="3"
+				labelSpanL="3"
+				labelSpanM="3"
+				labelSpanS="12"
+				adjustLabelSpan="false"
+				emptySpanXL="4"
+				emptySpanL="4"
+				emptySpanM="4"
+				emptySpanS="0"
+				columnsXL="1"
+				columnsL="1"
+				columnsM="1"
+				singleContainerFullSize="false" >
+				<f:content>
+					<Label text="{i18n>orderDateLabel}" />
+					<Text id="orderDate" text="{path: 'OrderDate', formatter: '.formatter.convertDate'}" />
+					<Label text="{i18n>shippedDateLabel}" />
+					<Text text="{path: 'ShippedDate', formatter: '.formatter.convertDate'}" />
+					<Label text="{i18n>shippedViaLabel}" />
+					<Text id="shipVia" text="{Shipper/CompanyName}" />
+					<Label text="{i18n>shipAddrLabel}" />
+					<Text id="shipAddr" text="{ShipCity}, {ShipAddress}" />
+				</f:content>
+			</f:SimpleForm>
+		</VBox>
+			<IconTabBar
+				id="iconTabBar"
+				class="sapUiResponsiveContentPadding">
+				<items>
+					<IconTabFilter
+						id="iconTabBarFilter1"
+						icon="sap-icon://hint"
+						tooltip="{i18n>detailIconTabBarInfo}">
+					</IconTabFilter>
+					<IconTabFilter
+						id="iconTabBarFilter2"
+						icon="sap-icon://attachment"
+						tooltip="{i18n>detailIconTabBarAttachments}">
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+			<!-- Product list -->
+			<Table
+				id="lineItemsList"
+				width="auto"
+				items="{path: 'Order_Details', parameters: {expand: 'Product'}}"
+				updateFinished="onListUpdateFinished"
+				noDataText="{i18n>detailLineItemTableNoDataText}"
+				busyIndicatorDelay="{detailView>/lineItemTableDelay}"
+				class="sapUiResponsiveMargin">
+				<headerToolbar>
+					<Toolbar id="lineItemsToolbar">
+						<Title
+							id="lineItemsHeader"
+							text="{detailView>/lineItemListTitle}"/>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column id="colID">
+						<Text text="{i18n>detailLineItemTableIDColumn}"/>
+					</Column>
+					<Column
+						id="colPrice"
+						minScreenWidth="Tablet"
+						demandPopin="true"
+						hAlign="End">
+						<Text text="{i18n>detailLineItemTableUnitNumberColumn}"/>
+					</Column>
+					<Column
+						id="colQuantity"
+						minScreenWidth="Tablet"
+						demandPopin="true"
+						hAlign="End">
+						<Text text="{i18n>detailLineItemTableQuantityColumn}"/>
+					</Column>
+					<Column
+						id="colDiscount"
+						minScreenWidth="Tablet"
+						demandPopin="true"
+						hAlign="End">
+						<Text text="{i18n>detailLineItemTableDiscountColumn}"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<ObjectIdentifier
+								title="{ProductID}"
+								text="{Product/ProductName}"/>
+							<ObjectNumber
+								number="{
+									path: 'UnitPrice',
+									formatter: '.formatter.currencyValue'
+								}"/>
+							<ObjectNumber
+								number="{
+									path: 'Quantity',
+									formatter: '.formatter.currencyValue'
+								}"/>
+							<ObjectNumber
+								number="{
+									path: 'Discount',
+									formatter: '.formatter.convertPercent'
+								}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</semantic:content>
+
+		<semantic:sendEmailAction>
+			<semantic:SendEmailAction
+				id="shareEmail"
+				press="onShareEmailPress"/>
+		</semantic:sendEmailAction>
+
+	</semantic:DetailPage>
+
+</mvc:View>

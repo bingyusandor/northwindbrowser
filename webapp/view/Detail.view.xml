@@ -87,6 +87,9 @@
 					<Column id="colID">
 						<Text text="{i18n>detailLineItemTableIDColumn}"/>
 					</Column>
+					<Column id="colCat">
+						<Text text="{i18n>detailLineItemTableCatColumn}"/>
+					</Column>
 					<Column
 						id="colPrice"
 						minScreenWidth="Tablet"
@@ -115,6 +118,10 @@
 							<ObjectIdentifier
 								title="{ProductID}"
 								text="{Product/ProductName}"/>
+							<ObjectNumber
+								number="{
+									path: 'Category/CategoryName'
+								}"/>
 							<ObjectNumber
 								number="{
 									path: 'UnitPrice',

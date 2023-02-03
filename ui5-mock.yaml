@@ -12,6 +12,11 @@ server:
   - name: fiori-tools-proxy
     afterMiddleware: compression
     configuration:
-      backend:
-        - path: /v2/northwind/northwind.svc/
-          url: https://services.odata.org/
+      ui5:
+        path:
+        - /resources
+        - /test-resources
+        url: https://ui5.sap.com
+      #  backend:
+      #    - path: /v2/northwind/northwind.svc/
+      #      url: https://services.odata.org/

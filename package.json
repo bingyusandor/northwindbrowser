@@ -4,7 +4,8 @@
   "description": "Northwind database browser app",
   "main": "index.js",
   "scripts": {
-    "start": "node .",
+    "start": "fiori run --config ui5.yaml --open index.html",
+    "start-mock": "fiori run --config ui5-mock.yaml --open test/mockServer.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +16,13 @@
     "northwind"
   ],
   "author": "Sani",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@sap/ux-ui5-tooling": "^1.8.5"
+  },
+  "ui5": {
+    "dependencies": [
+        "@sap/ux-ui5-tooling"
+    ]
+}
 }

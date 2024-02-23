@@ -18,11 +18,14 @@
   "author": "Sani",
   "license": "ISC",
   "devDependencies": {
-    "@sap/ux-ui5-tooling": "^1.8.5"
+    "@sap/ux-ui5-tooling": "^1.12.2"
   },
   "ui5": {
     "dependencies": [
-        "@sap/ux-ui5-tooling"
+      "@sap/ux-ui5-tooling"
     ]
-}
+  },
+  "dependencies": {
+    "@ui5/cli": "^3.9.1"
+  }
 }
